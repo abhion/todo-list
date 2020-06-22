@@ -3,17 +3,17 @@ import styles from './CreateTodo.module.css';
 
 function CreateTodo({ dispatch }) {
     const [todoTxt, setTodoTxt] = useState("");
-    const [isInvalid, setInpValidity] = useState(false);
+    const [isValid, setInpValidity] = useState(true);
 
     const inpChangeHandler = e => {
         setTodoTxt(e.target.value);
-        setInpValidity(false);
+        setInpValidity(true);
     };
 
     const addTodoHandler = e => {
         e.preventDefault();
         if (!todoTxt) {
-            setInpValidity(true);
+            setInpValidity(false);
             return;
         }
         dispatch({
@@ -35,7 +35,7 @@ function CreateTodo({ dispatch }) {
                 <button type="submit">+</button>
             </form>
                {
-                    isInvalid ? <span className={styles['error-message']}>Enter todo</span> : ''
+                    !isValid ? <span className={styles['error-message']}>Enter todo</span> : ''
                } 
         </div>
     );
